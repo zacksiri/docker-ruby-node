@@ -11,8 +11,10 @@ RUN apk add curl wget bash git libpq nodejs
 # in preparation for the rest
 RUN gem install bundler --no-document
 
-# create folder where the app will be copied to
+RUN apk --update add --virtual build_deps \
+    build-base libc-dev linux-headers \
+    openssl-dev postgresql-dev libxml2-dev libxslt-dev && \
+    bundle config build.nokogiri --use-system-libraries
+
 RUN mkdir /usr/app
 WORKDIR /usr/app
-
-RUN rm -rf /var/cache/apk/*
