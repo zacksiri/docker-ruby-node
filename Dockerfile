@@ -11,4 +11,8 @@ RUN apk add curl wget bash git libpq nodejs
 # in preparation for the rest
 RUN gem install bundler --no-document
 
+# create folder where the app will be copied to
+RUN mkdir /usr/app
+WORKDIR /usr/app
+
 RUN rm -rf /var/cache/apk/*
